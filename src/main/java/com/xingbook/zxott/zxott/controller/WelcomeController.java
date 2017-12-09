@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WelcomeController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
-    @Value("${application.message:Hello World}")
+    @Value("${application.message}")
     private String message;
 
     private final ZSuberVipMapper zSuberVipMapper;

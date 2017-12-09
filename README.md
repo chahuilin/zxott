@@ -4,3 +4,15 @@
 
 加入了mybatis generator,可以自动生成持久层代码
 
+#在项目中配置多套环境的配置方法
+
+项目启动的时候也可以设置 
+    
+    Java -jar xxxxxx.jar --spring.profiles.actiove=production
+
+也可以
+直接修改application.yml文件中的
+
+    spring:
+      profiles:
+          active: production
