@@ -16,7 +16,7 @@
 
 package com.xingbook.zxott.zxott.controller;
 
-import com.xingbook.zxott.zxott.entity.ZSpeakerExample;
+import com.xingbook.zxott.zxott.entity.ZSpeaker;
 import com.xingbook.zxott.zxott.entity.ZSuberVip;
 import com.xingbook.zxott.zxott.mapper.xingbook.ZSpeakerMapper;
 import com.xingbook.zxott.zxott.mapper.xingbook_user.ZSuberVipMapper;
@@ -54,16 +54,31 @@ public class WelcomeController extends BaseController {
     @GetMapping("/")
     @ResponseBody
     public ZSuberVip welcome(Integer id) {
-        logger.debug("application.message:{}",message);
+        logger.debug("application.message:{}", message);
 
         long count = zSpeakerMapper.countByExample(null);
 
-        logger.debug("zSpeakerMapper计数:{}",count);
+        logger.debug("zSpeakerMapper计数:{}", count);
 
         ZSuberVip zSuberVip = zSuberVipMapper.selectByPrimaryKey(id);
-        logger.debug("-------{}",zSuberVip);
+        logger.debug("-------{}", zSuberVip);
         System.out.println(zSuberVip.getNickName());
         return zSuberVip;
+    }
+
+    @GetMapping("/testCache")
+    @ResponseBody
+    public ZSpeaker testCache(Integer id) {
+        ZSpeaker zSpeaker = zSpeakerService.selectByPrimaryKey(id);
+        logger.debug("-------{}", zSpeaker);
+        return zSpeaker;
+    }
+
+    @GetMapping("/cacheEvict")
+    @ResponseBody
+    public String cacheEvict(Integer id) {
+        zSpeakerService.CacheEvict(id);
+        return "hello";
     }
 
 
