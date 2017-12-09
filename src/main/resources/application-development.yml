@@ -1,0 +1,24 @@
+server:
+  port: 8000
+
+application:
+  message: 这是开发环境
+
+logging:
+  path: D:\\idea_workspace\\zxott
+  level:
+    root: INFO
+    com.xingbook.zxott.zxott: TRACE
+
+spring:
+  datasource:
+    xingbook_user:
+      url: jdbc:mysql://120.26.4.86:3306/xingbook-user?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: tryme
+      driverClassName: com.mysql.jdbc.Driver
+    xingbook:
+      url: jdbc:mysql://120.26.4.86:3306/xingbook2?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: tryme
+      driverClassName: com.mysql.jdbc.Driver

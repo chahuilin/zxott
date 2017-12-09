@@ -1,0 +1,25 @@
+server:
+  port: 80
+
+application:
+  message: 这是生产环境
+
+logging:
+  path: D:\\idea_workspace\\zxott
+  level:
+    root: INFO
+    com.xingbook.zxott.zxott: DEBUG
+    com.xingbook.zxott.zxott.mapper: WARN
+
+spring:
+  datasource:
+    xingbook_user:
+      url: jdbc:mysql://120.26.4.86:3306/xingbook-user?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: tryme
+      driverClassName: com.mysql.jdbc.Driver
+    xingbook:
+      url: jdbc:mysql://120.26.4.86:3306/xingbook2?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: tryme
+      driverClassName: com.mysql.jdbc.Driver
