@@ -16,53 +16,55 @@
 
 package com.xingbook.zxott.zxott.controller;
 
-import com.xingbook.zxott.zxott.entity.ZSpeaker;
+import com.xingbook.zxott.zxott.entity.ZSpeakerExample;
 import com.xingbook.zxott.zxott.entity.ZSuberVip;
 import com.xingbook.zxott.zxott.mapper.xingbook.ZSpeakerMapper;
 import com.xingbook.zxott.zxott.mapper.xingbook_user.ZSuberVipMapper;
 import com.xingbook.zxott.zxott.service.ZSpeakerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.Map;
-
 
 @Controller
-public class WelcomeController {
+public class WelcomeController extends BaseController {
+    private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
-	@Value("${application.message:Hello World}")
-	private String message = "Hello World";
-	
-	private final ZSuberVipMapper zSuberVipMapper;
+    @Value("${application.message:Hello World}")
+    private String message;
 
-	private final ZSpeakerMapper zSpeakerMapper;
+    private final ZSuberVipMapper zSuberVipMapper;
 
-	private final ZSpeakerService zSpeakerService;
+    private final ZSpeakerMapper zSpeakerMapper;
 
-	@SuppressWarnings("SpringJavaAutowiringInspection")
-	@Autowired
-	public WelcomeController(ZSpeakerMapper zSpeakerMapper, ZSuberVipMapper zSuberVipMapper, ZSpeakerService zSpeakerService) {
-		this.zSpeakerMapper = zSpeakerMapper;
-		this.zSuberVipMapper = zSuberVipMapper;
-		this.zSpeakerService = zSpeakerService;
-	}
+    private final ZSpeakerService zSpeakerService;
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    public WelcomeController(ZSpeakerMapper zSpeakerMapper, ZSuberVipMapper zSuberVipMapper, ZSpeakerService zSpeakerService) {
+        this.zSpeakerMapper = zSpeakerMapper;
+        this.zSuberVipMapper = zSuberVipMapper;
+        this.zSpeakerService = zSpeakerService;
+    }
 
-	@GetMapping("/")
-	@ResponseBody
-    public String welcome(Map<String, Object> model) {
-		model.put("time", new Date());
-		model.put("message", this.message);
-		ZSuberVip zSuberVip = zSuberVipMapper.selectByPrimaryKey(1);
-		System.out.println(zSuberVip.getNickName());
-		ZSpeaker zSpeaker = zSpeakerService.selectByPrimaryKey(1);
-		System.out.println(zSpeaker.getName());
-		return "welcome";
-	}
+    @GetMapping("/")
+    @ResponseBody
+    public ZSuberVip welcome(Integer id) {
+        logger.debug("application.message:{}",message);
+
+        long count = zSpeakerMapper.countByExample(null);
+
+        logger.debug("zSpeakerMapper计数:{}",count);
+
+        ZSuberVip zSuberVip = zSuberVipMapper.selectByPrimaryKey(id);
+        logger.debug("-------{}",zSuberVip);
+        System.out.println(zSuberVip.getNickName());
+        return zSuberVip;
+    }
 
 
 }
