@@ -15,6 +15,7 @@ public class BaseController {
     @ExceptionHandler({Exception.class})
     @ResponseBody
     public Object Exception(Exception e) {
+        e.printStackTrace();
         HashMap<Object, Object> map = new HashMap<>();
         map.put("code", -1);
         map.put("msg", e.toString());
