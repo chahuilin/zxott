@@ -25,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,12 +45,15 @@ public class WelcomeController extends BaseController {
 
     private final ZSpeakerService zSpeakerService;
 
+    private final StringRedisTemplate template;
+
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
-    public WelcomeController(ZSpeakerMapper zSpeakerMapper, ZSuberVipMapper zSuberVipMapper, ZSpeakerService zSpeakerService) {
+    public WelcomeController(ZSpeakerMapper zSpeakerMapper, ZSuberVipMapper zSuberVipMapper, ZSpeakerService zSpeakerService, StringRedisTemplate template) {
         this.zSpeakerMapper = zSpeakerMapper;
         this.zSuberVipMapper = zSuberVipMapper;
         this.zSpeakerService = zSpeakerService;
+        this.template = template;
     }
 
     @GetMapping("/")
@@ -78,6 +83,19 @@ public class WelcomeController extends BaseController {
     @ResponseBody
     public String cacheEvict(Integer id) {
         zSpeakerService.CacheEvict(id);
+        return "hello";
+    }
+
+    @GetMapping("/testredis")
+    @ResponseBody
+    public String testredis() {
+        ValueOperations<String, String> ops = this.template.opsForValue();
+        String key = "spring.boot.redis.test";
+        if (!this.template.hasKey(key)) {
+            logger.debug("-------set");
+            ops.set(key, "foo");
+        }
+        System.out.println("Found key " + key + ", value=" + ops.get(key));
         return "hello";
     }
 
