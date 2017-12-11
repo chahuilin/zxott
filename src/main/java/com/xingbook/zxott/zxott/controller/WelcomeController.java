@@ -82,6 +82,7 @@ public class WelcomeController extends BaseController {
     @GetMapping("/cacheEvict")
     @ResponseBody
     public String cacheEvict(Integer id) {
+        zSpeakerService.asyc();
         zSpeakerService.CacheEvict(id);
         return "hello";
     }
