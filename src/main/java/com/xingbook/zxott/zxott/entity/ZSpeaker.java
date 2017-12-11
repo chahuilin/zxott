@@ -1,8 +1,9 @@
 package com.xingbook.zxott.zxott.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ZSpeaker {
+public class ZSpeaker implements Serializable{
     private Integer id;
 
     private String name;
