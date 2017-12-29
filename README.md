@@ -12,7 +12,7 @@
 
 项目启动的时候也可以设置 
     
-    Java -jar xxxxxx.jar --spring.profiles.actiove=production
+    Java -jar xxxxxx.jar -Dspring.profiles.active=production
 
 也可以
 直接修改application.yml文件中的
