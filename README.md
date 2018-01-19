@@ -20,3 +20,8 @@
     spring:
       profiles:
           active: production
+
+# 集成swagger
+
+直接访问：http://127.0.0.1:8000/swagger-ui.html
+

@@ -29,10 +29,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
+@RequestMapping("test")
 public class WelcomeController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
