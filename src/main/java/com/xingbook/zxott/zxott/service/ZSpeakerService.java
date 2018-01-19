@@ -1,6 +1,6 @@
 package com.xingbook.zxott.zxott.service;
 
-import com.xingbook.zxott.zxott.controller.WelcomeController;
+import com.xingbook.zxott.zxott.config.CacheConfig;
 import com.xingbook.zxott.zxott.entity.ZSpeaker;
 import com.xingbook.zxott.zxott.mapper.xingbook.ZSpeakerMapper;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
+@org.springframework.cache.annotation.CacheConfig(cacheNames=CacheConfig.RESOURCE)
 public class ZSpeakerService {
     private static Logger logger = LoggerFactory.getLogger(ZSpeakerService.class);
 
@@ -23,12 +24,12 @@ public class ZSpeakerService {
         this.zSpeakerMapper = zSpeakerMapper;
     }
 
-    @Cacheable("ZSpeaker")
+    @Cacheable
     public ZSpeaker selectByPrimaryKey(Integer id) {
         return zSpeakerMapper.selectByPrimaryKey(id);
     }
 
-    @CacheEvict("ZSpeaker")
+    @CacheEvict
     public void CacheEvict(Integer id) {
         logger.debug("清除缓存");
     }

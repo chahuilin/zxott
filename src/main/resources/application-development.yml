@@ -13,12 +13,12 @@ logging:
 spring:
   datasource:
     xingbook_user:
-      url: jdbc:mysql://120.26.4.86:3306/xingbook-user?useUnicode=true&characterEncoding=utf-8
+      url: jdbc:mysql://120.26.4.86:3306/xingbook_user?useUnicode=true&characterEncoding=utf-8
       username: root
       password: tryme
       driverClassName: com.mysql.jdbc.Driver
     xingbook:
-      url: jdbc:mysql://120.26.4.86:3306/xingbook2?useUnicode=true&characterEncoding=utf-8
+      url: jdbc:mysql://120.26.4.86:3306/xingbook?useUnicode=true&characterEncoding=utf-8
       username: root
       password: tryme
       driverClassName: com.mysql.jdbc.Driver
